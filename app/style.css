@@ -2,8 +2,8 @@ body { margin: 0; font: 15px/1.4 system-ui, sans-serif; color: #1d1d1f; backgrou
 header, main, footer { padding: 12px 24px; }
 h1 { margin: 0; font-size: 22px; }
 .sub { margin: 2px 0 0; color: #666; }
-.list { list-style: none; margin: 0; padding: 0; max-width: 960px; }
-.row { display: grid; grid-template-columns: 90px 50px 1fr 140px 90px; gap: 12px; align-items: center; min-height: 44px; padding: 0 12px; border-bottom: 1px solid #e5e5e5; background: #fff; }
+.list { list-style: none; margin: 0; padding: 0; min-width: 0; }
+.row { display: grid; grid-template-columns: 90px 50px 1fr 120px 64px; gap: 12px; align-items: center; min-height: 44px; padding: 0 12px; border-bottom: 1px solid #e5e5e5; background: #fff; }
 .row .id { font-family: ui-monospace, monospace; }
 .row.sev1 .sev { color: #b00020; font-weight: 600; }
 .row.sev2 .sev { color: #a15c00; }
@@ -16,3 +16,19 @@ footer { color: #777; font-size: 13px; }
 .acked { color: #1a7f37; font-weight: 600; }
 footer code { font-family: ui-monospace, monospace; }
 [hidden] { display: none !important; }
+.layout { display: grid; grid-template-columns: minmax(0, 900px) 300px; gap: 20px; align-items: start; }
+.row { cursor: pointer; }
+.row:hover { background: #f3f6fb; }
+.row:focus-visible { outline: 2px solid #3b6fd8; outline-offset: -2px; }
+.row.selected { background: #e8effc; box-shadow: inset 3px 0 0 #3b6fd8; }
+.panel { position: sticky; top: 12px; background: #fff; border: 1px solid #d5d9e0; border-radius: 8px; padding: 14px 16px; }
+.panel-head { display: flex; justify-content: space-between; align-items: center; padding: 0; }
+.panel-id { margin: 0; font: 600 18px ui-monospace, monospace; }
+.panel-close { font-size: 20px; line-height: 1; border: 0; background: none; cursor: pointer; color: #666; }
+.panel-sev { margin: 4px 0 8px; }
+.panel-sev.sev1 { color: #b00020; font-weight: 600; }
+.panel-sev.sev2 { color: #a15c00; }
+.panel-facts { display: grid; grid-template-columns: 72px 1fr; gap: 4px 8px; margin: 0 0 12px; }
+.panel-facts dt { color: #666; }
+.panel-facts dd { margin: 0; }
+@media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .panel { position: static; } }
