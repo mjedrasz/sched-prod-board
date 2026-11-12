@@ -76,7 +76,17 @@ function showError(err) {
 /** R1: keyed update, newest first. Existing rows keep their DOM node (and any click in flight). */
 function render(incidents) {
   const existing = new Map([...list.children].map((li) => [li.dataset.id, li]));
-  const wanted = incidents.map((i) => existing.get(i.id) ?? buildRow(i));
+  const wanted = incidents.map((i) => {
+    const li = existing.get(i.id);
+    if (!li) return buildRow(i);
+    const t = li.querySelector('time');
+    if (t.getAttribute('datetime') !== i.openedAt) {
+      t.setAttribute('datetime', i.openedAt);
+      t.title = i.openedAt;
+      t.textContent = localTime(i.openedAt);
+    }
+    return li;
+  });
   const keep = new Set(incidents.map((i) => i.id));
   for (const [id, li] of existing) if (!keep.has(id)) li.remove();
   wanted.forEach((li, idx) => {
